@@ -4,7 +4,9 @@ meteor create codeserver
 cd codeserver
 meteor npm install  #see tutorial?
 meteor SET DEPLOY_HOSTNAME=galaxy.meteor.com
-meteor deploy codeserver.meteorapp.com
+
+#DEPLOY
+meteor deploy codeserver.meteorapp.com --settings ./settings.json
 
 #SECTION: Run
 #URL: http://codeserver.meteorapp.com
@@ -17,4 +19,3 @@ git commit -m 'codeserver'
 git remote add origin https://github.com/jtankers/codeserver.git
 #Note: Assure that .git/config > url = https://github.com/jtankers/codeserver.git
 git push -u -f origin master
-

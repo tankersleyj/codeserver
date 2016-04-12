@@ -1,0 +1,8 @@
+{
+  "galaxy.meteor.com": {
+    "env": {
+      "ROOT_URL": "http://codeserver.meteorapp.com/",
+      "DEPLOY_HOSTNAME":"galaxy.meteor.com",
+      "MONGO_URL": "mongodb://admin:admin@ds042138.mlab.com:42138/codeserver"
+    }
+  } }
