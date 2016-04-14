@@ -1,7 +1,12 @@
 import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
-
 import './task.html';
+
+Template.task.helpers({
+    isOwner() {
+        return this.owner === Meteor.userId();
+    },
+});
 
 Template.task.events({
     'click .toggle-checked'() {
@@ -11,4 +16,9 @@ Template.task.events({
     'click .delete'() {
         Meteor.call('tasks.remove', this._id);
     },
+
+    'click .toggle-private'() {
+        Meteor.call('tasks.setPrivate', this._id, !this.private);
+    },
+    
 });
