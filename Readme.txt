@@ -19,3 +19,7 @@ git commit -m 'codeserver'
 git remote add origin https://github.com/jtankers/codeserver.git
 #Note: Assure that .git/config > url = https://github.com/jtankers/codeserver.git
 git push -u -f origin master
+
+
+#Reactive Dictionary
+meteor add reactive-dict
