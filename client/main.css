@@ -31,6 +31,11 @@ header {
     position: relative;
 }
 
+header .header-right {
+    float: right;
+    vertical-align: top;
+}
+
 #login-buttons {
     display: block;
 }
@@ -102,20 +107,16 @@ li.private {
     border-color: #ddd;
 }
 
-header .hide-completed {
-    float: right;
-}
-
 .toggle-private {
     margin-left: 5px;
 }
 
 .sort-span {
-    width: 50px;
+    width: 25px;
 }
 
 .sort-text {
-    width: 50px;
+    width: 25px;
 }
 
 .align-right {
@@ -125,6 +126,7 @@ header .hide-completed {
 .align-left {
     float: left;
 }
+
 @media (max-width: 600px) {
     li {
         padding: 12px 15px;

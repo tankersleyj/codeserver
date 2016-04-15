@@ -21,12 +21,14 @@ Template.task.events({
         Meteor.call('tasks.setPrivate', this._id, !this.private);
     },
 
-    // 'change .sort-text'() {
-    //     Meteor.call('tasks.setSort', this._id, this.sort);
-    // },
-
     'change .sort-text': function (event) {
-        Meteor.call('tasks.setSort', this._id, event.currentTarget.value);
+        var sortOrder = event.currentTarget.value;
+        if (!isNaN(parseFloat(sortOrder))) {
+            sortOrder = parseFloat(sortOrder);
+        } else {
+            sortOrder = 0;
+        }
+        Meteor.call('tasks.setSort', this._id, sortOrder);
     },
 
 });

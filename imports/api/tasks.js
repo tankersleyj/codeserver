@@ -9,12 +9,14 @@ if (Meteor.isServer) {
 
     // Only publish tasks that are public or belong to the current user
     Meteor.publish('tasks', function tasksPublication() {
+        const sortDirection = -1;
+
         return Tasks.find({
             $or: [
                 { private: { $ne: true } },
                 { owner: this.userId },
             ]},
-            {sort:{'sort':1}
+            {sort:{'sort':sortDirection}
         });
     });
 }
@@ -28,9 +30,18 @@ Meteor.methods({
             throw new Meteor.Error('not-authorized');
         }
 
+        const task = Tasks.findOne({}, {sort: {sort: -1}});
+        var maxSort = task.sort;
+
+        if (!isNaN(parseFloat(maxSort))) {
+            maxSort = parseFloat(maxSort) + 1;
+        } else {
+            maxSort = 1;
+        }
+
         Tasks.insert({
             text: text,
-            sort: "",
+            sort: maxSort,
             createdAt: new Date(),
             owner: Meteor.userId(),
             username: Meteor.user().username,
@@ -60,7 +71,7 @@ Meteor.methods({
 
     'tasks.setSort'(taskId, setSort) {
         check(taskId, String);
-        check(setSort, String);
+        check(setSort, Number);
         const task = Tasks.findOne(taskId);
         if (task.private && task.owner !== Meteor.userId()) {
             // If the task is private, make sure only the owner can check it off
