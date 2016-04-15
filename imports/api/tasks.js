@@ -13,9 +13,9 @@ if (Meteor.isServer) {
             $or: [
                 { private: { $ne: true } },
                 { owner: this.userId },
-            ],
+            ]},
+            {sort:{'sort':1}
         });
-
     });
 }
 
@@ -29,7 +29,8 @@ Meteor.methods({
         }
 
         Tasks.insert({
-            text,
+            text: text,
+            sort: "",
             createdAt: new Date(),
             owner: Meteor.userId(),
             username: Meteor.user().username,
