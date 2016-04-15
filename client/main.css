@@ -110,13 +110,21 @@ header .hide-completed {
     margin-left: 5px;
 }
 
-.sort-text {
-    width: 25px;
+.sort-span {
+    width: 50px;
 }
+
+.sort-text {
+    width: 50px;
+}
+
 .align-right {
     float: right;
 }
 
+.align-left {
+    float: left;
+}
 @media (max-width: 600px) {
     li {
         padding: 12px 15px;

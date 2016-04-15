@@ -20,5 +20,13 @@ Template.task.events({
     'click .toggle-private'() {
         Meteor.call('tasks.setPrivate', this._id, !this.private);
     },
-    
+
+    // 'change .sort-text'() {
+    //     Meteor.call('tasks.setSort', this._id, this.sort);
+    // },
+
+    'change .sort-text': function (event) {
+        Meteor.call('tasks.setSort', this._id, event.currentTarget.value);
+    },
+
 });

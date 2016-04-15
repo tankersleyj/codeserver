@@ -3,7 +3,13 @@
         <button class="delete">&times;</button>
 
         <input type="checkbox" checked="{{checked}}" class="toggle-checked" />
-        <input type="text" value="{{sort}}" class="sort-text" placeholder="sort">
+        <span class="sort-span">
+        {{#if isOwner}}
+            <input type="text" value="{{sort}}" id="sort-text" class="sort-text" placeholder="sort">
+        {{else}}
+            {{sort}}
+        {{/if}}
+        </span>
 
         <span class="text">
             <strong>{{username}}</strong> - {{text}}
