@@ -17,20 +17,14 @@ Template.body.helpers({
         const hideCompleted = instance.state.get('hideCompleted');
         const hideOtherUsers = instance.state.get('hideOtherUsers');
         var sortDirection = 1;
-        var loggedUserName;
-        if(!this.userId) {
-            loggedUserName = "";
-        }else{
-            loggedUserName = Meteor.user().username;
-        }
 
         if (sortDescending) { sortDirection = -1; }
         if (hideCompleted) {
             // If hide completed is checked, filter tasks
-            if (hideOtherUsers) {
+            if (hideOtherUsers && Meteor.user()) {
                 return Tasks.find({
                     checked: {$ne: true},
-                    username: loggedUserName,
+                    username: Meteor.user().username,
                 }, {sort: {'sort': sortDirection}})
             } else {
                 return Tasks.find({
@@ -40,9 +34,9 @@ Template.body.helpers({
         }
 
         // Otherwise, return all of the tasks
-        if (hideOtherUsers) {
+        if (hideOtherUsers && Meteor.user()) {
             return Tasks.find({
-                username: loggedUserName,
+                username: Meteor.user().username,
             }, {sort: {'sort': sortDirection}})
         } else {
             return Tasks.find({
@@ -52,10 +46,6 @@ Template.body.helpers({
 
     incompleteCount() {
         return Tasks.find({ checked: { $ne: true } }, { sort: {'sort':1}}).count();
-    },
-
-    loggedUserName() {
-        return Meteor.user().username;
     },
     
 });

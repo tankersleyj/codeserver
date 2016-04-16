@@ -1,29 +1,43 @@
 <template name="task">
     <li class="{{#if checked}}checked{{/if}} {{#if private}}private{{/if}}">
         <input type="checkbox" checked="{{checked}}" class="toggle-checked" />
-        <span class="sort-span">
-        {{#if isOwner}}
-            <input type="text" value="{{sort}}" id="sort-text" class="sort-text" placeholder="sort">
-        {{else}}
-            {{sort}}
-        {{/if}}
-        </span>
 
-        <span class="text">
-            <strong>{{username}}</strong> - {{text}}
+        <span class="sort-span">
+            {{#if isOwner}}
+                {{#if edit}}
+                    <input type="text" value="{{sort}}" class="sort-text" placeholder="sort">
+                {{else}}
+                    {{sort}}
+                {{/if}}
+            {{else}}
+                {{sort}}
+            {{/if}}
+            <strong>{{username}}</strong>
         </span>
 
         <span class="align-right">
-        {{#if isOwner}}
-            <input type="checkbox" checked="{{edit}}" class="toggle-edit" disabled/><span class="toggle-edit">edit</span>
-            <input type="checkbox" checked="{{private}}" class="toggle-private" />private
-            <button class="delete">&times;</button>
-        {{else}}
-            {{#if currentUser}}
-                <button class="toggle-private">Hide</button>
+            {{#if isOwner}}
+                <input type="checkbox" checked="{{edit}}" class="toggle-edit" /><span class="toggle-edit">edit</span>
+                <input type="checkbox" checked="{{private}}" class="toggle-private" />private
+                <button class="delete">&times;</button>
+            {{else}}
+                {{#if currentUser}}
+                    <button class="toggle-private">Hide</button>
+                {{/if}}
             {{/if}}
-        {{/if}}
         </span>
 
+        <span class="text">
+            {{#if isOwner}}
+                {{#if edit}}
+                    <!--<input type="text" value="{{text}}" class="edit-text" placeholder="task text">-->
+                    <textarea value="{{text}}" class="edit-text" placeholder="task text" rows="4"></textarea>
+                {{else}}
+                    {{text}}
+                {{/if}}
+            {{else}}
+                {{text}}
+            {{/if}}
+        </span>
     </li>
 </template>

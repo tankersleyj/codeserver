@@ -21,6 +21,10 @@ Template.task.events({
         Meteor.call('tasks.setPrivate', this._id, !this.private);
     },
 
+    'click .toggle-edit'() {
+        Meteor.call('tasks.setEdit', this._id, !this.edit);
+    },
+    
     'change .sort-text': function (event) {
         var sortOrder = event.currentTarget.value;
         if (!isNaN(parseFloat(sortOrder))) {
@@ -29,6 +33,11 @@ Template.task.events({
             sortOrder = 0;
         }
         Meteor.call('tasks.setSort', this._id, sortOrder);
+    },
+
+    'change .edit-text': function (event) {
+        var editText = event.currentTarget.value;
+        Meteor.call('tasks.setText', this._id, editText);
     },
 
 });

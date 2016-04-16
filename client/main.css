@@ -108,7 +108,7 @@ li.private {
 }
 
 .toggle-edit {
-    color: #888;
+    /*color: #888;*/
 }
 
 .toggle-private {
@@ -121,6 +121,10 @@ li.private {
 
 .sort-text {
     width: 40px;
+}
+
+.edit-text {
+    width: 100%;
 }
 
 .align-right {
