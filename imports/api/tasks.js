@@ -51,8 +51,9 @@ Meteor.methods({
     'tasks.remove'(taskId) {
         check(taskId, String);
         const task = Tasks.findOne(taskId);
-        if (task.private && task.owner !== Meteor.userId()) {
-            // If the task is private, make sure only the owner can delete it
+        // if (task.private && task.owner !== Meteor.userId()) {
+        if (task.owner !== Meteor.userId()) {
+            // make sure only the owner can delete it
             throw new Meteor.Error('not-authorized');
         }
         Tasks.remove(taskId);
@@ -87,9 +88,9 @@ Meteor.methods({
         const task = Tasks.findOne(taskId);
 
         // Make sure only the task owner can make a task private
-        if (task.owner !== Meteor.userId()) {
-            throw new Meteor.Error('not-authorized');
-        }
+        // if (task.owner !== Meteor.userId()) {
+        //     throw new Meteor.Error('not-authorized');
+        // }
 
         Tasks.update(taskId, { $set: { private: setToPrivate } });
     },

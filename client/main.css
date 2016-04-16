@@ -107,16 +107,20 @@ li.private {
     border-color: #ddd;
 }
 
+.toggle-edit {
+    color: #888;
+}
+
 .toggle-private {
     margin-left: 5px;
 }
 
 .sort-span {
-    width: 25px;
+    width: 40px;
 }
 
 .sort-text {
-    width: 25px;
+    width: 40px;
 }
 
 .align-right {
