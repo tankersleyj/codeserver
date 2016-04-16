@@ -1,0 +1,25 @@
+<body>
+  <a href="http://www.codeserver.net"><img src="/images/codeserverlogo.png"/></a>
+  <div class="container">
+    <header>
+      <h1>Tasks (active: {{incompleteCount}}, {{loggedUserName}})</h1>
+        <span class="header-right">
+            <span class="hide-completed"><input type="checkbox" />Hide Completed</span><br>
+            <span class="hide-other-users"><input type="checkbox" />Hide Other Users</span><br>
+            <span class="sort-descending"><input type="checkbox" />Sort Descending</span>
+        </span>
+        {{> loginButtons}}
+        {{#if currentUser}}
+            <form class="new-task">
+                <input type="text" name="text" placeholder="Type to add new tasks (alpha version)" />
+            </form>
+        {{/if}}
+    </header>
+    <ul>
+      {{#each tasks}}
+        {{> task}}
+      {{/each}}
+    </ul>
+  </div>
+</body>
+ 
