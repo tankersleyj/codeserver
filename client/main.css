@@ -31,9 +31,15 @@ header {
     position: relative;
 }
 
-header .header-right {
+.header-checkbox {
     float: right;
     vertical-align: top;
+    z-index: 1;
+}
+
+.header-login {
+    z-index: -1;
+    width: 70%;  /*prevent overlap with checkboxes*/
 }
 
 #login-buttons {
@@ -52,6 +58,10 @@ form {
     margin-top: 10px;
     margin-bottom: -10px;
     position: relative;
+}
+
+.new-task {
+    width: 100%;  /* Change to 70% if more check boxes added to prevent overlap */
 }
 
 .new-task input {
@@ -96,6 +106,18 @@ li .text {
 
 li.checked {
     color: #888;
+}
+
+.login-message {
+    color: #888;
+    font-style: italic;
+    box-sizing: border-box;
+    padding: 10px 0;
+    background: transparent;
+    border: none;
+    width: 100%;
+    padding-right: 80px;
+    font-size: .75em;
 }
 
 li.checked .text {

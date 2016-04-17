@@ -2,18 +2,28 @@
   <a href="http://www.codeserver.net"><img src="/images/codeserverlogo.png"/></a>
   <div class="container">
     <header>
-      <h1>Tasks (active: {{incompleteCount}}) [Under Development]</h1>
-        <span class="header-right">
+      <h1>Tasks (active: {{incompleteCount}})</h1>
+        <span class="header-checkbox">
+            <span class="sort-descending"><input type="checkbox" />Sort Descending</span><br>
             <span class="hide-completed"><input type="checkbox" />Hide Completed</span><br>
-            <span class="hide-other-users"><input type="checkbox" />Hide Other Users</span><br>
-            <span class="sort-descending"><input type="checkbox" />Sort Descending</span>
+            {{#if currentUser}}
+                <span class="hide-other-users"><input type="checkbox" />Hide Other Users</span><br>
+            {{/if}}
         </span>
-        {{> loginButtons}}
+        <div class="header-login">
+            {{> loginButtons}}
+        </div>
+        <div>
         {{#if currentUser}}
             <form class="new-task">
                 <input type="text" name="text" placeholder="Type to add new tasks" />
             </form>
+        {{else}}
+            <form class="new-task">
+                <span class="login-message">(Click "Sign in" to manage tasks or to create a new account. Guest password="password".)</span>
+            </form>
         {{/if}}
+        </div>
     </header>
     <ul>
       {{#each tasks}}
