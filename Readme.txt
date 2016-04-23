@@ -1,3 +1,6 @@
+#install coffee-script transcompiler for webstorm
+npm install -g coffee-script
+
 #SECTION: Create and deploy new meteor app
 #URL: meteor.com
 meteor create codeserver
