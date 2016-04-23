@@ -3,6 +3,7 @@ import { Mongo } from 'meteor/mongo';
 import { check } from 'meteor/check';
 
 export const Tasks = new Mongo.Collection('tasks');
+import './tasks-coffee.js';
 
 if (Meteor.isServer) {
     // This code only runs on the server
@@ -90,7 +91,23 @@ Meteor.methods({
             throw new Meteor.Error('not-authorized');
         }
         Tasks.update(taskId, { $set: { text: setText } });
+        var htmlText = Meteor.call('tasks.replaceHtmlTags', setText);
+        Tasks.update(taskId, { $set: { htmlText: htmlText } });
     },
+
+    'tasks.replaceHtmlTags'(tagText) {
+        check(tagText, String);
+        var htmlText = tagText;
+        // disable all html
+        htmlText = htmlText.replace('<','[');
+        htmlText = htmlText.replace('>',']');
+        // re-enable selected html
+        htmlText = htmlText.replace('[b]','<b>').replace('[/b]','</b>');
+        htmlText = htmlText.replace('[i]','<i>').replace('[/i]','</i>');
+        htmlText = htmlText.replace('[u]','<u>').replace('[/u]','</u>');
+        return htmlText;
+    },
+    
 
     'tasks.setPrivate'(taskId, setToPrivate) {
         check(taskId, String);

@@ -34,12 +34,13 @@ header {
 .header-checkbox {
     float: right;
     vertical-align: top;
-    z-index: 1;
+    display: block;
+    z-index: 100;
+    position: relative;
 }
 
 .header-login {
-    z-index: -1;
-    width: 70%;  /*prevent overlap with checkboxes*/
+    width: 100%;  /*prevent overlap with checkboxes*/
 }
 
 #login-buttons {
@@ -146,7 +147,7 @@ li.private {
 }
 
 .edit-text {
-    width: 100%;
+    width: 96%;
 }
 
 .align-right {

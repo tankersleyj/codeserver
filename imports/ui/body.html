@@ -9,6 +9,9 @@
             {{#if currentUser}}
                 <span class="hide-other-users"><input type="checkbox" />Hide Other Users</span><br>
             {{/if}}
+            <span class="header-help">
+                <a id="helpLink" title="help" href="#" onclick="window.alert('Selected html elements may be embedded in text.');return false;">help</a>
+            </span>
         </span>
         <div class="header-login">
             {{> loginButtons}}

@@ -37,6 +37,7 @@ Template.task.events({
 
     'change .edit-text': function (event) {
         var editText = event.currentTarget.value;
+        // editText=Meteor.call('tasks.replaceTags', editText)
         Meteor.call('tasks.setText', this._id, editText);
     },
 
