@@ -41,7 +41,7 @@ Meteor.methods({
             maxSort = 1;
         }
 
-        var htmlText = Meteor.call('tasks.replaceHtmlTags', text);
+        var htmlText = Meteor.call('tasks.filterHtmlFormatTags', text);
 
         Tasks.insert({
             text: text,
@@ -97,12 +97,13 @@ Meteor.methods({
             throw new Meteor.Error('not-authorized');
         }
         Tasks.update(taskId, { $set: { text: setText } });
-        var htmlText = Meteor.call('tasks.replaceHtmlTags', setText);
+        var htmlText = Meteor.call('tasks.filterHtmlFormatTags', setText);
         Tasks.update(taskId, { $set: { htmlText: htmlText } });
         Tasks.update(taskId, { $set: { editedAt: new Date() } });
+        Tasks.update(taskId, { $set: { edited: true } });
     },
 
-    'tasks.replaceHtmlTags'(tagText) {
+    'tasks.filterHtmlFormatTags'(tagText) {
         check(tagText, String);
         var htmlText = tagText;
         // disable all html
@@ -110,10 +111,11 @@ Meteor.methods({
         // re-enable selected html
         htmlText = htmlText.replace(/\(b\)/gi,'<b>').replace(/\(\/b\)/gi,'</b>');
         htmlText = htmlText.replace(/\(br\)/gi,'<br>');
+        htmlText = htmlText.replace(/\(del\)/gi,'<del>').replace(/\(\/del\)/gi,'</del>');
         htmlText = htmlText.replace(/\(details\)/gi,'<details>').replace(/\(\/details\)/gi,'</details>');
         htmlText = htmlText.replace(/\(em\)/gi,'<em>').replace(/\(\/em\)/gi,'</em>');
         htmlText = htmlText.replace(/\(i\)/gi,'<i>').replace(/\(\/i\)/gi,'</i>');
-        htmlText = htmlText.replace(/\(del\)/gi,'<del>').replace(/\(\/del\)/gi,'</del>');
+        htmlText = htmlText.replace(/\(li\)/gi,'<li>').replace(/\(\/li\)/gi,'</li>');
         htmlText = htmlText.replace(/\(output\)/gi,'<output>').replace(/\(\/output\)/gi,'</output>');
         htmlText = htmlText.replace(/\(p\)/gi,'<p>').replace(/\(\/p\)/gi,'</p>');
         htmlText = htmlText.replace(/\(q\)/gi,'<q>').replace(/\(\/q\)/gi,'</q>');
@@ -126,6 +128,7 @@ Meteor.methods({
         htmlText = htmlText.replace(/\(sup\)/gi,'<sup>').replace(/\(\/sup\)/gi,'</sup>');
         htmlText = htmlText.replace(/\(tfoot\)/gi,'<tfoot>').replace(/\(\/tfoot\)/gi,'</tfoot>');
         htmlText = htmlText.replace(/\(u\)/gi,'<u>').replace(/\(\/u\)/gi,'</u>');
+        htmlText = htmlText.replace(/\(ul\)/gi,'<ul>').replace(/\(\/ul\)/gi,'</ul>');
         htmlText = htmlText.replace(/\(var\)/gi,'<var>').replace(/\(\/var\)/gi,'</var>');
         htmlText = htmlText.replace(/\(wbr\)/gi,'<wbr>').replace(/\(\/wbr\)/gi,'</wbr>');
         htmlText = htmlText.replace(/\(blockquote\)/gi,'<blockquote>').replace(/\(\/blockquote\)/gi,'</blockquote>');

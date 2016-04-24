@@ -147,7 +147,7 @@ li.private {
 }
 
 .edit-text {
-    width: 96%;
+    width: 98%;
 }
 
 .align-right {
@@ -160,6 +160,12 @@ li.private {
 
 .task-attributes {
     color: #888;
+    font-style: italic;
+    font-size: .75em;
+}
+
+.task-owner{
+    color: #00F;
     font-style: italic;
     font-size: .75em;
 }

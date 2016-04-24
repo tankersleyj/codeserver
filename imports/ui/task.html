@@ -13,7 +13,6 @@
             {{else}}
                 {{sort}}
             {{/if}}
-            <strong>{{username}}</strong>
         </span>
 
         <span class="align-right">
@@ -30,10 +29,19 @@
                     <!--<input type="text" value="{{text}}" class="edit-text" placeholder="task text">-->
                     <textarea value="{{text}}" class="edit-text" placeholder="task text" rows="4"></textarea>
                 {{else}}
-                    {{{htmlText}}} <span class="task-attributes"><sub>{{editedAt}}</sub></span>
+                    {{{htmlText}}}
+                    <sub>
+                        <span class="task-owner">{{username}}</span>
+                        <span class="task-attributes">{{#if edited}}edited{{else}}created{{/if}}</span>
+                        <span class="task-attributes">{{editedAt}}</span>
+                    </sub>
                 {{/if}}
             {{else}}
-                {{{htmlText}}} <span class="task-attributes"><sub>{{editedAt}}</sub></span>
+                <sub>
+                    <span class="task-owner">{{username}}</span>
+                    <span class="task-attributes">{{#if edited}}edited{{else}}created{{/if}}</span>
+                    <span class="task-attributes">{{editedAt}}</span>
+                </sub>
             {{/if}}
         </span>
     </li>
