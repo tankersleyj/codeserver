@@ -3,10 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="f4e3f484-2c12-4b27-b549-1dec4db686e1" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/main.css" afterPath="$PROJECT_DIR$/client/main.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/imports/ui/body.html" afterPath="$PROJECT_DIR$/imports/ui/body.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/imports/ui/task.html" afterPath="$PROJECT_DIR$/imports/ui/task.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/imports/ui/task.js" afterPath="$PROJECT_DIR$/imports/ui/task.js" />
     </list>
     <ignored path="codeserver.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -493,7 +489,7 @@
       <workItem from="1460429279772" duration="53691000" />
       <workItem from="1460932487674" duration="12217000" />
       <workItem from="1461446871821" duration="12344000" />
-      <workItem from="1461497440482" duration="27809000" />
+      <workItem from="1461497440482" duration="27826000" />
     </task>
     <task id="LOCAL-00001" summary="Initial Add">
       <created>1460304761451</created>
@@ -705,11 +701,18 @@
       <option name="project" value="LOCAL" />
       <updated>1461537441488</updated>
     </task>
-    <option name="localTasksCounter" value="31" />
+    <task id="LOCAL-00031" summary="Debug check/line-through">
+      <created>1461538842978</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1461538842978</updated>
+    </task>
+    <option name="localTasksCounter" value="32" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="130070000" />
+    <option name="totallyTimeSpent" value="130087000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="23" y="26" width="1159" height="701" extended-state="0" />
@@ -747,7 +750,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Add Graphics to public/images (debugged)" />
     <MESSAGE value="Meteor Tutorial with CodeServer graphics" />
     <MESSAGE value="Debugged support for mLab MongoDb" />
     <MESSAGE value="Add Secure Login" />
@@ -772,7 +774,8 @@
     <MESSAGE value="Recode find logic including and/or logic" />
     <MESSAGE value="Move sub tasks (non-integer sorts) to sub lists of parent lists" />
     <MESSAGE value="update filter, sorting and counts to be consisten with all modes, including sub-text" />
-    <option name="LAST_COMMIT_MESSAGE" value="update filter, sorting and counts to be consisten with all modes, including sub-text" />
+    <MESSAGE value="Debug check/line-through" />
+    <option name="LAST_COMMIT_MESSAGE" value="Debug check/line-through" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
