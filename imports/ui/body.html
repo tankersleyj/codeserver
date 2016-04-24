@@ -10,9 +10,12 @@
                 <span class="hide-other-users"><input type="checkbox" />Hide Other Users</span><br>
             {{/if}}
             <span class="header-help">
-                <a id="helpLink" title="help" href="#" onclick="window.alert('Tasks on Meteor by CodeServer');return false;">about</a>
+                <small>
                 <a id="helpLink" title="help" href="#" onclick="window.alert('Selected html elements may be embedded in text.');return false;">help</a>
+                <a id="helpLink" title="help" href="#" onclick="window.alert('Tasks on Meteor by CodeServer');return false;">about</a>
+                </small>
             </span>
+            <span class="task-attributes"><sup>v0.01</sup></span>
         </span>
         <div class="header-login">
             {{> loginButtons}}
