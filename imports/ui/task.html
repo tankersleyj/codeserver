@@ -19,11 +19,15 @@
             {{#if isOwner}}
                 <input type="checkbox" checked="{{edit}}" class="toggle-edit" /><span class="toggle-edit">edit</span>
                 <input type="checkbox" checked="{{private}}" class="toggle-private" />private
-                <button class="delete">&times;</button>
+                {{#if isChild}}
+                    <button class="sub-delete"><sup>&times;</sup></button>
+                {{else}}
+                    <span class="delete"><sup>&times;</sup></span>
+                {{/if}}
             {{/if}}
         </span>
 
-        <span class="{{#if isChild}}sub-text{{else}}text{{/if}}">
+        <span class="text">
             {{#if isOwner}}
                 {{#if edit}}
                     <!--<input type="text" value="{{text}}" class="edit-text" placeholder="task text">-->
