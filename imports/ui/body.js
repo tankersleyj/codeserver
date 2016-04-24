@@ -13,34 +13,56 @@ Template.body.onCreated(function bodyOnCreated() {
 Template.body.helpers({
     tasks() {
         const instance = Template.instance();
-        const sortDescending = !instance.state.get('sortAscending');
-        const hideCompleted = !instance.state.get('showCompleted');
-        const hideOtherUsers = !instance.state.get('showOtherUsers');
-        var sortDirection = 1;
+        const sortAscending = instance.state.get('sortAscending');
+        const showCompleted = instance.state.get('showCompleted');
+        const showOtherUsers = instance.state.get('showOtherUsers');
+        var sortDirection = -1;
 
-        if (sortDescending) { sortDirection = -1; }
-        if (hideCompleted) {
-            // If hide completed is checked, filter tasks
-            if (hideOtherUsers && Meteor.user()) {
-                return Tasks.find({
-                    checked: {$ne: true},
-                    username: Meteor.user().username,
-                }, {sort: {'sort': sortDirection}})
+        if (sortAscending) { sortDirection = 1; }
+        if (showCompleted) {
+            if (Meteor.user()) {
+                if (showOtherUsers) {
+                    return Tasks.find(
+                        {$or: [{private: false}, {username: Meteor.user().username}]},
+                        {sort: {'sort': sortDirection}},
+                    )
+                } else {
+                    return Tasks.find(
+                        {username: Meteor.user().username},
+                        {sort: {'sort': sortDirection}},
+                    )
+                }
+            } else {
+                return Tasks.find(
+                    {private: false},
+                    {sort: {'sort': sortDirection}}
+                )
+            }
+        } else {
+            if (Meteor.user()) {
+                if (showOtherUsers) {
+                    return Tasks.find({
+                            checked: {$ne: true},
+                            $or: [{private: false}, {username: Meteor.user().username}]
+                        },
+                        {sort: {'sort': sortDirection}},
+                    )
+                } else {
+                    return Tasks.find({
+                            checked: {$ne: true},
+                            username: Meteor.user().username
+                        },
+                        {sort: {'sort': sortDirection}},
+                    )
+                }
             } else {
                 return Tasks.find({
-                    checked: {$ne: true},
-                }, {sort: {'sort': sortDirection}})
+                        checked: {$ne: true},
+                        private: false
+                    },
+                    {sort: {'sort': sortDirection}}
+                )
             }
-        }
-
-        // Otherwise, return all of the tasks
-        if (hideOtherUsers && Meteor.user()) {
-            return Tasks.find({
-                username: Meteor.user().username,
-            }, {sort: {'sort': sortDirection}})
-        } else {
-            return Tasks.find({
-            }, {sort: {'sort': sortDirection}})
         }
     },
 
