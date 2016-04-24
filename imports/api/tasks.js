@@ -51,6 +51,7 @@ Meteor.methods({
             owner: Meteor.userId(),
             username: Meteor.user().username,
             htmlText: htmlText,
+            private: true,
         });
     },
 
