@@ -99,12 +99,30 @@ Meteor.methods({
         check(tagText, String);
         var htmlText = tagText;
         // disable all html
-        htmlText = htmlText.replace('<','[');
-        htmlText = htmlText.replace('>',']');
+        htmlText = htmlText.replace(/</gi,'(').replace(/>/gi,')');
         // re-enable selected html
-        htmlText = htmlText.replace('[b]','<b>').replace('[/b]','</b>');
-        htmlText = htmlText.replace('[i]','<i>').replace('[/i]','</i>');
-        htmlText = htmlText.replace('[u]','<u>').replace('[/u]','</u>');
+        htmlText = htmlText.replace(/\(b\)/gi,'<b>').replace(/\(\/b\)/gi,'</b>');
+        htmlText = htmlText.replace(/\(br\)/gi,'<br>');
+        htmlText = htmlText.replace(/\(details\)/gi,'<details>').replace(/\(\/details\)/gi,'</details>');
+        htmlText = htmlText.replace(/\(em\)/gi,'<em>').replace(/\(\/em\)/gi,'</em>');
+        htmlText = htmlText.replace(/\(i\)/gi,'<i>').replace(/\(\/i\)/gi,'</i>');
+        htmlText = htmlText.replace(/\(del\)/gi,'<del>').replace(/\(\/del\)/gi,'</del>');
+        htmlText = htmlText.replace(/\(output\)/gi,'<output>').replace(/\(\/output\)/gi,'</output>');
+        htmlText = htmlText.replace(/\(p\)/gi,'<p>').replace(/\(\/p\)/gi,'</p>');
+        htmlText = htmlText.replace(/\(q\)/gi,'<q>').replace(/\(\/q\)/gi,'</q>');
+        htmlText = htmlText.replace(/\(s\)/gi,'<s>').replace(/\(\/s\)/gi,'</s>');
+        htmlText = htmlText.replace(/\(samp\)/gi,'<samp>').replace(/\(\/samp\)/gi,'</samp>');
+        htmlText = htmlText.replace(/\(small\)/gi,'<small>').replace(/\(\/small\)/gi,'</small>');
+        htmlText = htmlText.replace(/\(strong\)/gi,'<strong>').replace(/\(\/strong\)/gi,'</strong>');htmlText = htmlText.replace(/\(sup\)/gi,'<sup>').replace(/\(\/sup\)/gi,'</sup>');
+        htmlText = htmlText.replace(/\(summary\)/gi,'<summary>').replace(/\(\/summary\)/gi,'</summary>');
+        htmlText = htmlText.replace(/\(sub\)/gi,'<sub>').replace(/\(\/sub\)/gi,'</sub>');
+        htmlText = htmlText.replace(/\(sup\)/gi,'<sup>').replace(/\(\/sup\)/gi,'</sup>');
+        htmlText = htmlText.replace(/\(tfoot\)/gi,'<tfoot>').replace(/\(\/tfoot\)/gi,'</tfoot>');
+        htmlText = htmlText.replace(/\(u\)/gi,'<u>').replace(/\(\/u\)/gi,'</u>');
+        htmlText = htmlText.replace(/\(var\)/gi,'<var>').replace(/\(\/var\)/gi,'</var>');
+        htmlText = htmlText.replace(/\(wbr\)/gi,'<wbr>').replace(/\(\/wbr\)/gi,'</wbr>');
+        htmlText = htmlText.replace(/\(blockquote\)/gi,'<blockquote>').replace(/\(\/blockquote\)/gi,'</blockquote>');
+        htmlText = htmlText.replace(/\(code\)/gi,'<code>').replace(/\(\/code\)/gi,'</code>');
         return htmlText;
     },
     
