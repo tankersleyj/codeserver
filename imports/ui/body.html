@@ -24,7 +24,7 @@
         <div>
         {{#if currentUser}}
             <form class="new-task">
-                <input type="text" name="text" placeholder="Type to add new task, then press [Enter]" />
+                <input type="text" name="text" placeholder='Type "Task" then press [Enter]' />
             </form>
         {{else}}
             <form class="new-task">
@@ -35,7 +35,17 @@
     </header>
     <ul>
       {{#each tasks}}
-        {{> task}}
+          {{> task}}
+          {{#if subTasksCount sort}}
+              <div class="sub-tasks">
+                <details>
+                <summary>Sub Tasks <sup>({{subTasksCount sort}})</sup></summary>
+                    {{#each subTasks sort}}
+                        {{> task}}
+                    {{/each}}
+                </details>
+              </div>
+          {{/if}}
       {{/each}}
     </ul>
   </div>

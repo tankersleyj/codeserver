@@ -79,6 +79,10 @@ form {
     outline: 0;
 }
 
+.sub-tasks {
+    padding-left: 40px;
+}
+
 ul {
     margin: 0;
     padding: 0;

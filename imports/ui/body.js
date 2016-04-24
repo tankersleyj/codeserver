@@ -17,24 +17,31 @@ Template.body.helpers({
         const showCompleted = instance.state.get('showCompleted');
         const showOtherUsers = instance.state.get('showOtherUsers');
         var sortDirection = -1;
-
+        var sortParent = -1;
         if (sortAscending) { sortDirection = 1; }
+
         if (showCompleted) {
             if (Meteor.user()) {
                 if (showOtherUsers) {
-                    return Tasks.find(
-                        {$or: [{private: false}, {username: Meteor.user().username}]},
+                    return Tasks.find({
+                            isChild: false,
+                            $or: [{private: false}, {username: Meteor.user().username}]
+                        },
                         {sort: {'sort': sortDirection}},
                     )
                 } else {
-                    return Tasks.find(
-                        {username: Meteor.user().username},
+                    return Tasks.find({
+                            isChild: false,
+                            username: Meteor.user().username
+                        },
                         {sort: {'sort': sortDirection}},
                     )
                 }
             } else {
-                return Tasks.find(
-                    {private: false},
+                return Tasks.find({
+                        isChild: false,
+                        private: false
+                    },
                     {sort: {'sort': sortDirection}}
                 )
             }
@@ -42,6 +49,7 @@ Template.body.helpers({
             if (Meteor.user()) {
                 if (showOtherUsers) {
                     return Tasks.find({
+                            isChild: false,
                             checked: {$ne: true},
                             $or: [{private: false}, {username: Meteor.user().username}]
                         },
@@ -49,6 +57,7 @@ Template.body.helpers({
                     )
                 } else {
                     return Tasks.find({
+                            isChild: false,
                             checked: {$ne: true},
                             username: Meteor.user().username
                         },
@@ -57,6 +66,7 @@ Template.body.helpers({
                 }
             } else {
                 return Tasks.find({
+                        isChild: false,
                         checked: {$ne: true},
                         private: false
                     },
@@ -64,10 +74,55 @@ Template.body.helpers({
                 )
             }
         }
+
+    },
+
+    subTasks(taskParent) {
+        var sortDirection = 1;
+        var sortParent = taskParent;
+
+        var childGt = Math.floor(sortParent);
+        var childLt = Math.floor(sortParent + 1);
+        
+        return Tasks.find(
+            {$and: [{sort: {$gt: childGt}}, {sort: {$lt: childLt}}]},
+            {sort: {'sort': 1}}
+        )
+    },
+
+    subTasksCount(taskParent) {
+        // check(taskParent, Number);
+        if (isNaN(taskParent)) {
+            return 0;
+        } else {
+            var childGt = Math.floor(taskParent);
+            var childLt = Math.floor(taskParent + 1);
+            if (taskParent > childGt) {
+                return 0;
+            } else {
+                return Tasks.find(
+                    {$and: [{sort: {$gt: childGt}}, {sort: {$lt: childLt}}]},
+                    {sort: {'sort': 1}}
+                ).count()
+            }
+        }
     },
 
     incompleteCount() {
-        return Tasks.find({ checked: { $ne: true } }, { sort: {'sort':1}}).count();
+        if (Meteor.user()) {
+            return Tasks.find({
+                    checked: {$ne: true},
+                    username: Meteor.user().username
+                },
+                {}
+            ).count()
+        } else {
+            return Tasks.find({
+                    checked: {$ne: true}
+                },
+                {}
+            ).count()
+        }
     },
     
 });

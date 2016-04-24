@@ -52,6 +52,7 @@ Meteor.methods({
             username: Meteor.user().username,
             htmlText: htmlText,
             private: true,
+            isChild: false,
         });
     },
 
@@ -86,6 +87,9 @@ Meteor.methods({
             throw new Meteor.Error('not-authorized');
         }
         Tasks.update(taskId, { $set: { sort: setSort } });
+        var isChild=false;
+        if (setSort != Math.floor(setSort)) { isChild=true; }
+        Tasks.update(taskId, { $set: { isChild: isChild } });
     },
 
     'tasks.setText'(taskId, setText) {
@@ -141,7 +145,20 @@ Meteor.methods({
         htmlText = htmlText.replace(/\(code\)/gi,'<code>').replace(/\(\/code\)/gi,'</code>');
         return htmlText;
     },
-    
+
+    'tasks.startDetails'(sort) {
+        // check(sort, Number);
+        // var startDetails = true;
+        // if (Number.isInteger(sort)==true) { startDetails=true; }
+        return sort;
+    },
+
+    'tasks.endDetails'(sort) {
+        // check(sort, Number);
+        var endDetails = false;
+        if (Number.isInteger(sort)==true) { endDetails=true; }
+        return endDetails;
+    },
 
     'tasks.setPrivate'(taskId, setToPrivate) {
         check(taskId, String);
