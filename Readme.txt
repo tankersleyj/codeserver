@@ -7,6 +7,7 @@ meteor create codeserver
 cd codeserver
 meteor npm install  #see tutorial?
 meteor SET DEPLOY_HOSTNAME=galaxy.meteor.com
+>DEPLOY_HOSTNAME=galaxy.meteor.com meteor deploy codeserver.meteorapp.com
 
 #DEPLOY
 meteor deploy codeserver.meteorapp.com --settings ./settings.json
