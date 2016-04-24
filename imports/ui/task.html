@@ -27,22 +27,18 @@
             {{#if isOwner}}
                 {{#if edit}}
                     <!--<input type="text" value="{{text}}" class="edit-text" placeholder="task text">-->
-                    <textarea value="{{text}}" class="edit-text" placeholder="task text" rows="4"></textarea>
+                    <textarea value="{{text}}" class="edit-text" placeholder="task text" rows="4"></textarea><br>
                 {{else}}
-                    {{{htmlText}}}
-                    <sub>
-                        <span class="task-owner">{{username}}</span>
-                        <span class="task-attributes">{{#if edited}}edited{{else}}created{{/if}}</span>
-                        <span class="task-attributes">{{editedAt}}</span>
-                    </sub>
+                    {{{htmlText}}}<br>
                 {{/if}}
             {{else}}
-                <sub>
-                    <span class="task-owner">{{username}}</span>
-                    <span class="task-attributes">{{#if edited}}edited{{else}}created{{/if}}</span>
-                    <span class="task-attributes">{{editedAt}}</span>
-                </sub>
+                {{{htmlText}}}<br>
             {{/if}}
+            <sub>
+                <span class="task-owner">{{username}}</span>
+                <span class="task-attributes">{{#if edited}}edited{{else}}created{{/if}}</span>
+                <span class="task-attributes">{{editedAt}}</span>
+            </sub>
         </span>
     </li>
 </template>
