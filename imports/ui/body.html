@@ -6,7 +6,7 @@
         <span class="header-checkbox">
             <small>
             <span class="header-help">
-                <a id="helpLink" title="help" href="#" onclick="window.alert('Most simple html formatting elements (b, br, i, u, details, summary, sub/sup, etc.) are supported and may be embedded in task text.  Example: <b>Important</b><br>');return false;">help</a>
+                <a id="helpLink" title="help" href="#" onclick="window.alert('Create sub-tasks by using decimals, example: 5.2; Most simple html formatting elements (b, br, i, u, details, summary, sub/sup, etc.) are supported and may be embedded in task text.  Example: <b>Important</b><br>');return false;">help</a>
                 <a id="helpLink" title="help" href="#" onclick="window.alert('Tasks on Meteor by CodeServer (codeserver.net)');return false;">about</a>
             </span>
             <span class="task-attributes"><sup>v0.02</sup></span>
@@ -39,7 +39,7 @@
           {{#if subTasksCount sort}}
               <div class="sub-tasks">
                 <details>
-                <summary>Sub Tasks <sup>({{subTasksCount sort}})</sup></summary>
+                <summary>{{sort}}.Sub Tasks <sup>({{subTasksCount sort}})</sup></summary>
                     {{#each subTasks sort}}
                         {{> task}}
                     {{/each}}

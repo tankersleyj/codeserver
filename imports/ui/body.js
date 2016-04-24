@@ -78,34 +78,159 @@ Template.body.helpers({
     },
 
     subTasks(taskParent) {
-        var sortDirection = 1;
-        var sortParent = taskParent;
+        // check(taskParent, Number);
+        if (isNaN(taskParent)) return 0;
 
-        var childGt = Math.floor(sortParent);
-        var childLt = Math.floor(sortParent + 1);
-        
-        return Tasks.find(
-            {$and: [{sort: {$gt: childGt}}, {sort: {$lt: childLt}}]},
-            {sort: {'sort': 1}}
-        )
+        var childGt = Math.floor(taskParent);
+        var childLt = Math.floor(taskParent + 1);
+
+        const instance = Template.instance();
+        const sortAscending = instance.state.get('sortAscending');
+        const showCompleted = instance.state.get('showCompleted');
+        const showOtherUsers = instance.state.get('showOtherUsers');
+        var sortDirection = -1;
+        var sortParent = -1;
+        if (sortAscending) { sortDirection = 1; }
+
+        if (showCompleted) {
+            if (Meteor.user()) {
+                if (showOtherUsers) {
+                    return Tasks.find({
+                            isChild: true,
+                            $and: [{sort: {$gt: childGt}}, {sort: {$lt: childLt}}],
+                            $or: [{private: false}, {username: Meteor.user().username}]
+                        },
+                        {sort: {'sort': sortDirection}},
+                    )
+                } else {
+                    return Tasks.find({
+                            isChild: true,
+                            $and: [{sort: {$gt: childGt}}, {sort: {$lt: childLt}}],
+                            username: Meteor.user().username
+                        },
+                        {sort: {'sort': sortDirection}},
+                    )
+                }
+            } else {
+                return Tasks.find({
+                        isChild: true,
+                        $and: [{sort: {$gt: childGt}}, {sort: {$lt: childLt}}],
+                        private: false
+                    },
+                    {sort: {'sort': sortDirection}}
+                )
+            }
+        } else {
+            if (Meteor.user()) {
+                if (showOtherUsers) {
+                    return Tasks.find({
+                            isChild: true,
+                            $and: [{sort: {$gt: childGt}}, {sort: {$lt: childLt}}],
+                            checked: {$ne: true},
+                            $or: [{private: false}, {username: Meteor.user().username}]
+                        },
+                        {sort: {'sort': sortDirection}},
+                    )
+                } else {
+                    return Tasks.find({
+                            isChild: true,
+                            $and: [{sort: {$gt: childGt}}, {sort: {$lt: childLt}}],
+                            checked: {$ne: true},
+                            username: Meteor.user().username
+                        },
+                        {sort: {'sort': sortDirection}},
+                    )
+                }
+            } else {
+                return Tasks.find({
+                        isChild: true,
+                        $and: [{sort: {$gt: childGt}}, {sort: {$lt: childLt}}],
+                        checked: {$ne: true},
+                        private: false
+                    },
+                    {sort: {'sort': sortDirection}}
+                )
+            }
+        }
+
     },
 
     subTasksCount(taskParent) {
         // check(taskParent, Number);
-        if (isNaN(taskParent)) {
-            return 0;
-        } else {
-            var childGt = Math.floor(taskParent);
-            var childLt = Math.floor(taskParent + 1);
-            if (taskParent > childGt) {
-                return 0;
+        if (isNaN(taskParent)) return 0;
+
+        var childGt = Math.floor(taskParent);
+        var childLt = Math.floor(taskParent + 1);
+
+        const instance = Template.instance();
+        const sortAscending = instance.state.get('sortAscending');
+        const showCompleted = instance.state.get('showCompleted');
+        const showOtherUsers = instance.state.get('showOtherUsers');
+        var sortDirection = -1;
+        var sortParent = -1;
+        if (sortAscending) { sortDirection = 1; }
+
+        if (showCompleted) {
+            if (Meteor.user()) {
+                if (showOtherUsers) {
+                    return Tasks.find({
+                            isChild: true,
+                            $and: [{sort: {$gt: childGt}}, {sort: {$lt: childLt}}],
+                            $or: [{private: false}, {username: Meteor.user().username}]
+                        },
+                        {sort: {'sort': sortDirection}},
+                    ).count();
+                } else {
+                    return Tasks.find({
+                            isChild: true,
+                            $and: [{sort: {$gt: childGt}}, {sort: {$lt: childLt}}],
+                            username: Meteor.user().username
+                        },
+                        {sort: {'sort': sortDirection}},
+                    ).count();
+                }
             } else {
-                return Tasks.find(
-                    {$and: [{sort: {$gt: childGt}}, {sort: {$lt: childLt}}]},
-                    {sort: {'sort': 1}}
-                ).count()
+                return Tasks.find({
+                        isChild: true,
+                        $and: [{sort: {$gt: childGt}}, {sort: {$lt: childLt}}],
+                        private: false
+                    },
+                    {sort: {'sort': sortDirection}}
+                ).count();
+            }
+        } else {
+            if (Meteor.user()) {
+                if (showOtherUsers) {
+                    return Tasks.find({
+                            isChild: true,
+                            $and: [{sort: {$gt: childGt}}, {sort: {$lt: childLt}}],
+                            checked: {$ne: true},
+                            $or: [{private: false}, {username: Meteor.user().username}]
+                        },
+                        {sort: {'sort': sortDirection}},
+                    ).count();
+                } else {
+                    return Tasks.find({
+                            isChild: true,
+                            $and: [{sort: {$gt: childGt}}, {sort: {$lt: childLt}}],
+                            checked: {$ne: true},
+                            username: Meteor.user().username
+                        },
+                        {sort: {'sort': sortDirection}},
+                    ).count();
+                }
+            } else {
+                return Tasks.find({
+                        isChild: true,
+                        $and: [{sort: {$gt: childGt}}, {sort: {$lt: childLt}}],
+                        checked: {$ne: true},
+                        private: false
+                    },
+                    {sort: {'sort': sortDirection}}
+                ).count();
             }
         }
+
     },
 
     incompleteCount() {

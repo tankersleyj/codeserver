@@ -109,6 +109,10 @@ li .text {
     margin-left: 10px;
 }
 
+li .sub-text {
+    margin-left: 10px;
+}
+
 li.checked {
     color: #888;
 }
@@ -151,6 +155,10 @@ li.private {
 }
 
 .edit-text {
+    width: 98%;
+}
+
+.edit-sub-text {
     width: 98%;
 }
 
