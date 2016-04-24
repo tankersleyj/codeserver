@@ -6,10 +6,10 @@
         <span class="header-checkbox">
             <small>
             <span class="header-help">
-                <a id="helpLink" title="help" href="#" onclick="window.alert('Most simple html formatting elements (b, br, i, u, details, summary, sub/sup, etc.) may be safely embedded in text.  Example: <b>Important</b><br>');return false;">help</a>
+                <a id="helpLink" title="help" href="#" onclick="window.alert('Most simple html formatting elements (b, br, i, u, details, summary, sub/sup, etc.) are supported and may be embedded in task text.  Example: <b>Important</b><br>');return false;">help</a>
                 <a id="helpLink" title="help" href="#" onclick="window.alert('Tasks on Meteor by CodeServer (codeserver.net)');return false;">about</a>
             </span>
-            <span class="task-attributes"><sup>v0.01</sup></span>
+            <span class="task-attributes"><sup>v0.02</sup></span>
             <br>
             <span class="sort-descending"><input type="checkbox" />Sort Descending</span><br>
             <span class="hide-completed"><input type="checkbox" />Hide Completed</span><br>
@@ -24,7 +24,7 @@
         <div>
         {{#if currentUser}}
             <form class="new-task">
-                <input type="text" name="text" placeholder="Type to add new tasks" />
+                <input type="text" name="text" placeholder="Type to add new task, then press [Enter]" />
             </form>
         {{else}}
             <form class="new-task">

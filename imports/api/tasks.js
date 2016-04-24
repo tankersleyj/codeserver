@@ -114,6 +114,12 @@ Meteor.methods({
         htmlText = htmlText.replace(/\(del\)/gi,'<del>').replace(/\(\/del\)/gi,'</del>');
         htmlText = htmlText.replace(/\(details\)/gi,'<details>').replace(/\(\/details\)/gi,'</details>');
         htmlText = htmlText.replace(/\(em\)/gi,'<em>').replace(/\(\/em\)/gi,'</em>');
+        htmlText = htmlText.replace(/\(h1\)/gi,'<h1>').replace(/\(\/h1\)/gi,'</h1>');
+        htmlText = htmlText.replace(/\(h2\)/gi,'<h2>').replace(/\(\/h2\)/gi,'</h2>');
+        htmlText = htmlText.replace(/\(h3\)/gi,'<h3>').replace(/\(\/h3\)/gi,'</h3>');
+        htmlText = htmlText.replace(/\(h4\)/gi,'<h4>').replace(/\(\/h4\)/gi,'</h4>');
+        htmlText = htmlText.replace(/\(h5\)/gi,'<h5>').replace(/\(\/h5\)/gi,'</h5>');
+        htmlText = htmlText.replace(/\(h6\)/gi,'<h6>').replace(/\(\/h6\)/gi,'</h6>');
         htmlText = htmlText.replace(/\(i\)/gi,'<i>').replace(/\(\/i\)/gi,'</i>');
         htmlText = htmlText.replace(/\(li\)/gi,'<li>').replace(/\(\/li\)/gi,'</li>');
         htmlText = htmlText.replace(/\(output\)/gi,'<output>').replace(/\(\/output\)/gi,'</output>');
