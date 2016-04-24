@@ -13,9 +13,9 @@ Template.body.onCreated(function bodyOnCreated() {
 Template.body.helpers({
     tasks() {
         const instance = Template.instance();
-        const sortDescending = instance.state.get('sortDescending');
-        const hideCompleted = instance.state.get('hideCompleted');
-        const hideOtherUsers = instance.state.get('hideOtherUsers');
+        const sortDescending = !instance.state.get('sortAscending');
+        const hideCompleted = !instance.state.get('showCompleted');
+        const hideOtherUsers = !instance.state.get('showOtherUsers');
         var sortDirection = 1;
 
         if (sortDescending) { sortDirection = -1; }
@@ -66,15 +66,15 @@ Template.body.events({
         target.text.value = '';
     },
 
-    'change .hide-completed input'(event, instance) {
-        instance.state.set('hideCompleted', event.target.checked);
+    'change .show-completed input'(event, instance) {
+        instance.state.set('showCompleted', event.target.checked);
     },
 
-    'change .hide-other-users input'(event, instance) {
-        instance.state.set('hideOtherUsers', event.target.checked);
+    'change .show-other-users input'(event, instance) {
+        instance.state.set('showOtherUsers', event.target.checked);
     },
 
-    'change .sort-descending input'(event, instance) {
-        instance.state.set('sortDescending', event.target.checked);
+    'change .sort-ascending input'(event, instance) {
+        instance.state.set('sortAscending', event.target.checked);
     },
 });
