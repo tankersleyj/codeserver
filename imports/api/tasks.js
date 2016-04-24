@@ -34,18 +34,23 @@ Meteor.methods({
         const task = Tasks.findOne({}, {sort: {sort: -1}});
         var maxSort = task.sort;
 
-        if (!isNaN(parseFloat(maxSort))) {
-            maxSort = parseFloat(maxSort) + 1;
+        // get next sort value
+        if (!isNaN(parseInt(maxSort))) {
+            maxSort = parseInt(maxSort) + 1 ;
         } else {
             maxSort = 1;
         }
+
+        var htmlText = Meteor.call('tasks.replaceHtmlTags', text);
 
         Tasks.insert({
             text: text,
             sort: maxSort,
             createdAt: new Date(),
+            editedAt: new Date(),
             owner: Meteor.userId(),
             username: Meteor.user().username,
+            htmlText: htmlText,
         });
     },
 
@@ -93,6 +98,7 @@ Meteor.methods({
         Tasks.update(taskId, { $set: { text: setText } });
         var htmlText = Meteor.call('tasks.replaceHtmlTags', setText);
         Tasks.update(taskId, { $set: { htmlText: htmlText } });
+        Tasks.update(taskId, { $set: { editedAt: new Date() } });
     },
 
     'tasks.replaceHtmlTags'(tagText) {

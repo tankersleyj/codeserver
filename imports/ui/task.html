@@ -30,10 +30,10 @@
                     <!--<input type="text" value="{{text}}" class="edit-text" placeholder="task text">-->
                     <textarea value="{{text}}" class="edit-text" placeholder="task text" rows="4"></textarea>
                 {{else}}
-                    {{{htmlText}}}
+                    {{{htmlText}}} <span class="task-attributes"><sub>{{editedAt}}</sub></span>
                 {{/if}}
             {{else}}
-                {{{htmlText}}}
+                {{{htmlText}}} <span class="task-attributes"><sub>{{editedAt}}</sub></span>
             {{/if}}
         </span>
     </li>

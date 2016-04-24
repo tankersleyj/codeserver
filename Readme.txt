@@ -31,3 +31,7 @@ git push -u -f origin master
 
 #Reactive Dictionary
 meteor add reactive-dict
+
+
+#OS X
+ls, cd

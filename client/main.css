@@ -158,6 +158,12 @@ li.private {
     float: left;
 }
 
+.task-attributes {
+    color: #888;
+    font-style: italic;
+    font-size: .75em;
+}
+
 @media (max-width: 600px) {
     li {
         padding: 12px 15px;
