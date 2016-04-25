@@ -21,14 +21,14 @@ body {
     left: 8;
     right: 8;
 
-    padding: 0;
-    margin: 80;
+    padding: 64;
+    margin: 64;
 
     font-size: 14px;
 }
 
 .container {
-    max-width: 1920px;
+    /*max-width: 1920px;*/
     margin: 0 auto;
     min-height: 100%;
     min-width: 100%;
