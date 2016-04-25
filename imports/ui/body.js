@@ -24,14 +24,14 @@ Template.body.helpers({
             if (Meteor.user()) {
                 if (showOtherUsers) {
                     return Tasks.find({
-                            isChild: false,
-                            $or: [{private: false}, {username: Meteor.user().username}]
+                            isChild: {$ne: true},
+                            $or: [{private: {$ne: true}}, {username: Meteor.user().username}]
                         },
                         {sort: {'sort': sortDirection}},
                     )
                 } else {
                     return Tasks.find({
-                            isChild: false,
+                            isChild: {$ne: true},
                             username: Meteor.user().username
                         },
                         {sort: {'sort': sortDirection}},
@@ -39,8 +39,8 @@ Template.body.helpers({
                 }
             } else {
                 return Tasks.find({
-                        isChild: false,
-                        private: false
+                        isChild: {$ne: true},
+                        private: {$ne: true}
                     },
                     {sort: {'sort': sortDirection}}
                 )
@@ -49,15 +49,15 @@ Template.body.helpers({
             if (Meteor.user()) {
                 if (showOtherUsers) {
                     return Tasks.find({
-                            isChild: false,
+                            isChild: {$ne: true},
                             checked: {$ne: true},
-                            $or: [{private: false}, {username: Meteor.user().username}]
+                            $or: [{private: {$ne: true}}, {username: Meteor.user().username}]
                         },
                         {sort: {'sort': sortDirection}},
                     )
                 } else {
                     return Tasks.find({
-                            isChild: false,
+                            isChild: {$ne: true},
                             checked: {$ne: true},
                             username: Meteor.user().username
                         },
@@ -66,9 +66,9 @@ Template.body.helpers({
                 }
             } else {
                 return Tasks.find({
-                        isChild: false,
+                        isChild: {$ne: true},
                         checked: {$ne: true},
-                        private: false
+                        private: {$ne: true}
                     },
                     {sort: {'sort': sortDirection}}
                 )
@@ -98,7 +98,7 @@ Template.body.helpers({
                     return Tasks.find({
                             isChild: true,
                             $and: [{sort: {$gt: childGt}}, {sort: {$lt: childLt}}],
-                            $or: [{private: false}, {username: Meteor.user().username}]
+                            $or: [{private: {$ne: true}}, {username: Meteor.user().username}]
                         },
                         {sort: {'sort': sortDirection}},
                     )
@@ -115,7 +115,7 @@ Template.body.helpers({
                 return Tasks.find({
                         isChild: true,
                         $and: [{sort: {$gt: childGt}}, {sort: {$lt: childLt}}],
-                        private: false
+                        private: {$ne: true}
                     },
                     {sort: {'sort': sortDirection}}
                 )
@@ -127,7 +127,7 @@ Template.body.helpers({
                             isChild: true,
                             $and: [{sort: {$gt: childGt}}, {sort: {$lt: childLt}}],
                             checked: {$ne: true},
-                            $or: [{private: false}, {username: Meteor.user().username}]
+                            $or: [{private: {$ne: true}}, {username: Meteor.user().username}]
                         },
                         {sort: {'sort': sortDirection}},
                     )
@@ -146,7 +146,7 @@ Template.body.helpers({
                         isChild: true,
                         $and: [{sort: {$gt: childGt}}, {sort: {$lt: childLt}}],
                         checked: {$ne: true},
-                        private: false
+                        private: {$ne: true}
                     },
                     {sort: {'sort': sortDirection}}
                 )
@@ -176,7 +176,7 @@ Template.body.helpers({
                     return Tasks.find({
                             isChild: true,
                             $and: [{sort: {$gt: childGt}}, {sort: {$lt: childLt}}],
-                            $or: [{private: false}, {username: Meteor.user().username}]
+                            $or: [{private: {$ne: true}}, {username: Meteor.user().username}]
                         },
                         {sort: {'sort': sortDirection}},
                     ).count();
@@ -193,7 +193,7 @@ Template.body.helpers({
                 return Tasks.find({
                         isChild: true,
                         $and: [{sort: {$gt: childGt}}, {sort: {$lt: childLt}}],
-                        private: false
+                        private: {$ne: true}
                     },
                     {sort: {'sort': sortDirection}}
                 ).count();
@@ -205,7 +205,7 @@ Template.body.helpers({
                             isChild: true,
                             $and: [{sort: {$gt: childGt}}, {sort: {$lt: childLt}}],
                             checked: {$ne: true},
-                            $or: [{private: false}, {username: Meteor.user().username}]
+                            $or: [{private: {$ne: true}}, {username: Meteor.user().username}]
                         },
                         {sort: {'sort': sortDirection}},
                     ).count();
@@ -224,7 +224,7 @@ Template.body.helpers({
                         isChild: true,
                         $and: [{sort: {$gt: childGt}}, {sort: {$lt: childLt}}],
                         checked: {$ne: true},
-                        private: false
+                        private: {$ne: true}
                     },
                     {sort: {'sort': sortDirection}}
                 ).count();
@@ -234,19 +234,67 @@ Template.body.helpers({
     },
 
     incompleteCount() {
-        if (Meteor.user()) {
-            return Tasks.find({
-                    checked: {$ne: true},
-                    username: Meteor.user().username
-                },
-                {}
-            ).count()
+        const instance = Template.instance();
+        const sortAscending = instance.state.get('sortAscending');
+        const showCompleted = instance.state.get('showCompleted');
+        const showOtherUsers = instance.state.get('showOtherUsers');
+        var sortDirection = -1;
+        var sortParent = -1;
+        if (sortAscending) { sortDirection = 1; }
+
+        if (showCompleted) {
+            if (Meteor.user()) {
+                if (showOtherUsers) {
+                    return Tasks.find({
+                            isChild: {$ne: true},
+                            $or: [{private: {$ne: true}}, {username: Meteor.user().username}]
+                        },
+                        {sort: {'sort': sortDirection}},
+                    ).count();
+                } else {
+                    return Tasks.find({
+                            isChild: {$ne: true},
+                            username: Meteor.user().username
+                        },
+                        {sort: {'sort': sortDirection}},
+                    ).count();
+                }
+            } else {
+                return Tasks.find({
+                        isChild: {$ne: true},
+                        private: {$ne: true}
+                    },
+                    {sort: {'sort': sortDirection}}
+                ).count();
+            }
         } else {
-            return Tasks.find({
-                    checked: {$ne: true}
-                },
-                {}
-            ).count()
+            if (Meteor.user()) {
+                if (showOtherUsers) {
+                    return Tasks.find({
+                            isChild: {$ne: true},
+                            checked: {$ne: true},
+                            $or: [{private: {$ne: true}}, {username: Meteor.user().username}]
+                        },
+                        {sort: {'sort': sortDirection}},
+                    ).count();
+                } else {
+                    return Tasks.find({
+                            isChild: {$ne: true},
+                            checked: {$ne: true},
+                            username: Meteor.user().username
+                        },
+                        {sort: {'sort': sortDirection}},
+                    ).count();
+                }
+            } else {
+                return Tasks.find({
+                        isChild: {$ne: true},
+                        checked: {$ne: true},
+                        private: {$ne: true}
+                    },
+                    {sort: {'sort': sortDirection}}
+                ).count();
+            }
         }
     },
     
