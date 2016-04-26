@@ -4,8 +4,6 @@
     <list default="true" id="f4e3f484-2c12-4b27-b549-1dec4db686e1" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/imports/api/tasks.js" afterPath="$PROJECT_DIR$/imports/api/tasks.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/imports/ui/body.html" afterPath="$PROJECT_DIR$/imports/ui/body.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/imports/ui/task.html" afterPath="$PROJECT_DIR$/imports/ui/task.html" />
     </list>
     <ignored path="codeserver.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -69,8 +67,8 @@
       <file leaf-file-name="body.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/imports/ui/body.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="330">
-              <caret line="26" column="41" selection-start-line="25" selection-start-column="0" selection-end-line="30" selection-end-column="21" />
+            <state relative-caret-position="345">
+              <caret line="27" column="71" selection-start-line="27" selection-start-column="58" selection-end-line="27" selection-end-column="92" />
               <folding>
                 <element signature="e#0#45#0" expanded="true" />
               </folding>
@@ -116,8 +114,8 @@
       <file leaf-file-name="tasks.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/imports/api/tasks.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="27">
-              <caret line="58" column="6" selection-start-line="58" selection-start-column="6" selection-end-line="58" selection-end-column="6" />
+            <state relative-caret-position="240">
+              <caret line="31" column="25" selection-start-line="31" selection-start-column="25" selection-end-line="31" selection-end-column="25" />
               <folding>
                 <element signature="e#0#39#0" expanded="true" />
               </folding>
@@ -495,7 +493,7 @@
       <workItem from="1460429279772" duration="53691000" />
       <workItem from="1460932487674" duration="12217000" />
       <workItem from="1461446871821" duration="12344000" />
-      <workItem from="1461497440482" duration="37709000" />
+      <workItem from="1461497440482" duration="38548000" />
     </task>
     <task id="LOCAL-00001" summary="Initial Add">
       <created>1460304761451</created>
@@ -749,11 +747,18 @@
       <option name="project" value="LOCAL" />
       <updated>1461581933129</updated>
     </task>
-    <option name="localTasksCounter" value="37" />
+    <task id="LOCAL-00037" summary="Prevent deleting tasks with sub-tasks; allow user to enter &quot;number task&quot; and sort accordingly">
+      <created>1461638736885</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1461638736885</updated>
+    </task>
+    <option name="localTasksCounter" value="38" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="139970000" />
+    <option name="totallyTimeSpent" value="140809000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="36" y="23" width="1159" height="707" extended-state="0" />
@@ -792,7 +797,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Public Private security" />
     <MESSAGE value="Add sorting (sorts, but sort text not yet saving)" />
     <MESSAGE value="Add Sort Save" />
     <MESSAGE value="Debugged to use numeric sorting, and sort reversing" />
@@ -817,7 +821,8 @@
     <MESSAGE value="refine header image" />
     <MESSAGE value="refine borders" />
     <MESSAGE value="debug sub-text editing" />
-    <option name="LAST_COMMIT_MESSAGE" value="debug sub-text editing" />
+    <MESSAGE value="Prevent deleting tasks with sub-tasks; allow user to enter &quot;number task&quot; and sort accordingly" />
+    <option name="LAST_COMMIT_MESSAGE" value="Prevent deleting tasks with sub-tasks; allow user to enter &quot;number task&quot; and sort accordingly" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1136,14 +1141,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/imports/api/tasks.tests.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="22" column="7" selection-start-line="22" selection-start-column="7" selection-end-line="22" selection-end-column="7" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/client/main.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="45">
@@ -1207,18 +1204,26 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/imports/ui/body.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="26" column="41" selection-start-line="25" selection-start-column="0" selection-end-line="30" selection-end-column="21" />
+        <state relative-caret-position="345">
+          <caret line="27" column="71" selection-start-line="27" selection-start-column="58" selection-end-line="27" selection-end-column="92" />
           <folding>
             <element signature="e#0#45#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/imports/api/tasks.tests.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="22" column="7" selection-start-line="22" selection-start-column="7" selection-end-line="22" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/imports/api/tasks.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="27">
-          <caret line="58" column="6" selection-start-line="58" selection-start-column="6" selection-end-line="58" selection-end-column="6" />
+        <state relative-caret-position="240">
+          <caret line="31" column="25" selection-start-line="31" selection-start-column="25" selection-end-line="31" selection-end-column="25" />
           <folding>
             <element signature="e#0#39#0" expanded="true" />
           </folding>

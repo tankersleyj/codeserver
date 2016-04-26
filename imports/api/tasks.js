@@ -35,9 +35,11 @@ Meteor.methods({
             var textStart=taskNum.length + 1;
             newText=newText.substring(textStart);
         } else {
-            const task = Tasks.findOne({}, {sort: {'sort': -1}});
-            if (!isNaN(parseInt(task.sort))) {
-                newSort=parseInt(task.sort) + 1;
+            const task = Tasks.findOne({username: Meteor.user().username}, {sort: {'sort': -1}});
+            if (task) {
+                if (!isNaN(parseInt(task.sort))) {
+                    newSort = parseInt(task.sort) + 1;
+                }
             }
         }
 
@@ -86,7 +88,6 @@ Meteor.methods({
         check(setChecked, Boolean);
         const task = Tasks.findOne(taskId);
         if (task.private && task.owner !== Meteor.userId()) {
-            // If the task is private, make sure only the owner can check it off
             throw new Meteor.Error('not-authorized');
         }
         Tasks.update(taskId, { $set: { checked: setChecked } });
@@ -97,7 +98,6 @@ Meteor.methods({
         check(setSort, Number);
         const task = Tasks.findOne(taskId);
         if (task.private && task.owner !== Meteor.userId()) {
-            // If the task is private, make sure only the owner can check it off
             throw new Meteor.Error('not-authorized');
         }
         Tasks.update(taskId, { $set: { sort: setSort } });
@@ -111,7 +111,6 @@ Meteor.methods({
         check(setText, String);
         const task = Tasks.findOne(taskId);
         if (task.owner !== Meteor.userId()) {
-            // If the task is private, make sure only the owner can check it off
             throw new Meteor.Error('not-authorized');
         }
         Tasks.update(taskId, { $set: { text: setText } });
@@ -193,7 +192,6 @@ Meteor.methods({
 
         const task = Tasks.findOne(taskId);
 
-        // Make only logged in users can make a task private
         if (task.owner !== Meteor.userId()) {
             throw new Meteor.Error('not-authorized');
         }
