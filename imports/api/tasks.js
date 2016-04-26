@@ -23,48 +23,62 @@ if (Meteor.isServer) {
 }
 
 Meteor.methods({
-    'tasks.insert'(text) {
-        check(text, String);
-
-        // Make sure the user is logged in before inserting a task
+    'tasks.insert'(newText) {
+        check(newText, String);
         if (! Meteor.userId()) {
             throw new Meteor.Error('not-authorized');
         }
-
-        const task = Tasks.findOne({}, {sort: {sort: -1}});
-        var maxSort = task.sort;
-
-        // get next sort value
-        if (!isNaN(parseInt(maxSort))) {
-            maxSort = parseInt(maxSort) + 1 ;
+        var newSort=1;
+        var taskNum=newText.split(" ", 1)[0];
+        if (!isNaN(taskNum)) {
+            newSort=parseFloat(taskNum);
+            var textStart=taskNum.length + 1;
+            newText=newText.substring(textStart);
         } else {
-            maxSort = 1;
+            const task = Tasks.findOne({}, {sort: {'sort': -1}});
+            if (!isNaN(parseInt(task.sort))) {
+                newSort=parseInt(task.sort) + 1;
+            }
         }
 
-        var htmlText = Meteor.call('tasks.filterHtmlFormatTags', text);
+        var isChild=false;
+        if (newSort != Math.floor(newSort)) { isChild=true; }
+        var htmlText = Meteor.call('tasks.filterHtmlFormatTags', newText);
 
         Tasks.insert({
-            text: text,
-            sort: maxSort,
+            text: newText,
+            sort: newSort,
             createdAt: new Date(),
             editedAt: new Date(),
             owner: Meteor.userId(),
             username: Meteor.user().username,
             htmlText: htmlText,
             private: true,
-            isChild: false,
+            isChild: isChild,
         });
     },
 
     'tasks.remove'(taskId) {
         check(taskId, String);
         const task = Tasks.findOne(taskId);
-        // if (task.private && task.owner !== Meteor.userId()) {
         if (task.owner !== Meteor.userId()) {
-            // make sure only the owner can delete it
             throw new Meteor.Error('not-authorized');
         }
-        Tasks.remove(taskId);
+        var sortP = task.sort;
+        if (sortP != parseInt(sortP)) {
+            Tasks.remove(taskId);  // parent
+        } else {
+            var sortGt = parseInt(sortP);
+            var sortLt = sortGt + 1;
+            var subTasks = Tasks.find({
+                    $and: [{sort: {$gt: sortGt}}, {sort: {$lt: sortLt}}]
+                },
+                {sort: {'sort': 1}},
+            ).count()
+            if (subTasks==0) {
+                Tasks.remove(taskId);
+            }
+        }
     },
 
     'tasks.setChecked'(taskId, setChecked) {
